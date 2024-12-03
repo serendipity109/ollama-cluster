@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: ollama
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: ollama
@@ -21,7 +21,9 @@ spec:
           protocol: TCP
         resources:
           limits:
-            nvidia.com/gpu: 1  # 請求 1 顆 GPU
+            cpu: "4"
+            memory: "16Gi"
+            nvidia.com/gpu: "1"
 ---
 apiVersion: v1
 kind: Service
