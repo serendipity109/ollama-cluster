@@ -21,8 +21,8 @@ spec:
               protocol: TCP
           resources:
             limits:
-              cpu: "4"
-              memory: "16Gi"
+              cpu: "12"
+              memory: "24Gi"
               nvidia.com/gpu: "1"
           imagePullPolicy: IfNotPresent  # 僅在鏡像不存在時拉取
           lifecycle:
