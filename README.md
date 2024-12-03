@@ -7,6 +7,12 @@ minikube start --driver docker --container-runtime docker --gpus all
 kubectl apply -f ollama-deployment.yaml
 ```
 
+# Check status
+```bash
+kubectl get pods
+kubectl get services
+```
+
 # 訪問服務
 ```bash
 ollama run llama3
@@ -14,7 +20,15 @@ ollama run llama3
 
 # Port forward
 ```bash
-kubectl port-forward --address 0.0.0.0 deployment/ollama 11434:11434
+./port-forward.sh
+```
+
+# Request
+```bash
+curl -X POST http://localhost:11434/api/generate -d '{
+  "model": "codestral",
+  "prompt": "hi"
+}'
 ```
 
 # 關掉 Pod Deployment

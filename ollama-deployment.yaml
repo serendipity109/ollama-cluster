@@ -13,17 +13,22 @@ spec:
         app: ollama
     spec:
       containers:
-      - name: ollama
-        image: ollama/ollama:latest
-        ports:
-        - name: http
-          containerPort: 11434
-          protocol: TCP
-        resources:
-          limits:
-            cpu: "4"
-            memory: "16Gi"
-            nvidia.com/gpu: "1"
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - name: http
+              containerPort: 11434
+              protocol: TCP
+          resources:
+            limits:
+              cpu: "4"
+              memory: "16Gi"
+              nvidia.com/gpu: "1"
+          imagePullPolicy: IfNotPresent  # 僅在鏡像不存在時拉取
+          lifecycle:
+            postStart:
+              exec:
+                command: ["ollama", "pull", "codestral"]
 ---
 apiVersion: v1
 kind: Service
@@ -33,5 +38,5 @@ spec:
   selector:
     app: ollama
   ports:
-  - protocol: TCP
-    port: 11434
+    - protocol: TCP
+      port: 11434
