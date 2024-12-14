@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mistral-7b-pv
+spec:
+  capacity:
+    storage: 10Gi  # 確保與 PVC 需求一致
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: standard  # 確保匹配 PVC 的 StorageClass
+  hostPath:
+    path: "/mnt/data/mistral-7b"  # 這是本地路徑，minikube-hostpath 會使用它

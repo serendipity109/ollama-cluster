@@ -13,6 +13,7 @@ spec:
         app: ollama
     spec:
       containers:
+        # Ollama 容器
         - name: ollama
           image: ollama/ollama:latest
           ports:
@@ -22,9 +23,12 @@ spec:
           resources:
             limits:
               cpu: "12"
-              memory: "24Gi"
+              memory: "36Gi"
               nvidia.com/gpu: "1"
-          imagePullPolicy: IfNotPresent  # 僅在鏡像不存在時拉取
+            requests:
+              cpu: "12"
+              memory: "36Gi"
+          imagePullPolicy: IfNotPresent
           lifecycle:
             postStart:
               exec:
@@ -35,8 +39,12 @@ kind: Service
 metadata:
   name: ollama-svc
 spec:
+  type: NodePort
   selector:
     app: ollama
   ports:
     - protocol: TCP
       port: 11434
+      targetPort: 11434
+      nodePort: 31434 
+
