@@ -27,12 +27,7 @@ kubectl get svc
 ollama run llama3
 ```
 
-# Restart service
-```bash
-kubectl rollout restart ollama
-```
-
-# 重啟deployment
+# Restart deployment
 ```bash
 kubectl rollout restart deployment/ollama
 ```
@@ -46,12 +41,20 @@ kubectl scale deployment ollama --replicas=0
 # 轉發loadbalancer出去
 ```bash
 minikube tunnel --cleanup
+
+sudo apt-get install socat
+sudo socat TCP-LISTEN:11434,fork TCP:10.101.234.148:11434
 ```
 
 # Request
 ```bash
 # ollama
-curl http://192.168.49.2:31434/api/generate -d '{
+curl http://172.21.31.219:11434/api/generate -d '{
+  "model": "codestral",
+  "prompt": "hi"
+}'
+
+curl http://192.168.49.2:31531/api/generate -d '{
   "model": "codestral",
   "prompt": "hi"
 }'

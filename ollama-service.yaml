@@ -39,12 +39,11 @@ kind: Service
 metadata:
   name: ollama-svc
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: ollama
   ports:
     - protocol: TCP
       port: 11434
       targetPort: 11434
-      nodePort: 31434 
 
