@@ -43,7 +43,7 @@ kubectl scale deployment ollama --replicas=0
 minikube tunnel --cleanup
 
 sudo apt-get install socat
-sudo socat TCP-LISTEN:11434,fork TCP:10.101.234.148:11434
+sudo socat TCP-LISTEN:11434,fork TCP:192.168.49.2:30424
 ```
 
 # Request
@@ -54,7 +54,7 @@ curl http://172.21.31.219:11434/api/generate -d '{
   "prompt": "hi"
 }'
 
-curl http://192.168.49.2:31531/api/generate -d '{
+curl http://192.168.49.2:30424/api/generate -d '{
   "model": "codestral",
   "prompt": "hi"
 }'
